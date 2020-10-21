@@ -4,9 +4,9 @@ var position,dog_image,happyDog_image,food,food_image;
 function preload()
 {
   //load the images here
-  dog_image = loadImage("images/dogImg1.png")
-  happyDog_image = loadImage("images/dogImg.png")
-  food_image = loadImage("images/food_image.jpg")
+  dog_image = loadImage("./dogImg1.png")
+  happyDog_image = loadImage("./dogImg.png")
+  food_image = loadImage("./food_image.jpg")
 }
 
 function setup() {
