@@ -14,16 +14,10 @@ function setup() {
   database = firebase.database();
   dog = createSprite(250,250,10,10);
   dog.shapeColor = "red";
+  dog.addImage(dog_image)
+  dog.scale = 0.2
   foodStock = database.ref('Food');
   foodStock.on("value",readStock)
-
-  //Creating the sprite of dog
-  dog = createSprite(250,300,20,20)
-  //Setting the color 
-  dog.shapeColor = "red"
-  //Adding the image 
-  dog.addImage("dog_image", dog_image)
-  dog.scale = 0.2
 
   //Creating the sprite of food 
   food = createSprite(250,200,20,20)
@@ -33,17 +27,19 @@ function setup() {
   food.addImage("food_image", food_image)
   food.scale = 0.3
 }
-food_remaining = 0
 function draw() {  
   background("orange")
   text("Note-Press up arrow key to feed drago milk", 135,50)
-  //text.fill("yellow")
+  if(foodS !== undefined){ 
   if(keyWentDown(UP_ARROW)){
     writeStock(foodS)
     dog.addImage(happyDog_image)
-    food_remaining = food_remaining+1
   }
-  text("Food Remaining = " + food_remaining,200,150)
+  if(keyWentUp(UP_ARROW)){
+    dog.addImage(dog_image)
+  }
+  text("Food Remaining = " + foodS,200,150)
+}
   drawSprites();
   //add styles here
   dog.display()
@@ -59,6 +55,6 @@ function writeStock(x){
    x=x-1
  }
   database.ref('/').update({
-    'food':x
+    'Food':x
   })
 }
